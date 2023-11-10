@@ -1,0 +1,623 @@
+<html>
+
+<head>
+	<title>B区仓库</title>
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=0.54, maximum-scale=1">
+	<link rel="stylesheet" type="text/css" href="iconfont.css?v=20181126">
+	<link rel="stylesheet" type="text/css" href="iconfont.css?v=2016070717">
+	<link rel="stylesheet" type="text/css" href="iconfont.css?v=2016070717">
+	<link rel="stylesheet" type="text/css" href="foxui.min.css?v=1698888712">
+	<link rel="stylesheet" type="text/css" href="style.css?v=1698906774">
+
+	<link href="detail.css?v=2.3" rel="stylesheet" type="text/css">
+	<script src="jquery-1.11.1.min.js"></script>
+	<script src="jquery-ui.js"></script>
+	<script src="jquery.ui.touch-punch.js"></script>
+	<script src="jquery.ui.touch-punch.min.js"></script>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			overflow: hidden
+		}
+
+		body {
+			background: black;
+		}
+
+		a {
+			text-decoration: none
+		}
+
+		.pingmian {
+			position: relative;
+		}
+
+		.dian {
+			width: 30px;
+			height: 30px;
+			position: absolute;
+			background: #2591d2;
+			color: #fff;
+			text-align: center;
+		}
+
+		#add {
+			position: fixed;
+			bottom: 10%;
+			right: 0.5rem;
+			background: #c00;
+			border-radius: 50%;
+			width: 3rem;
+			color: #fff;
+			text-align: center;
+			line-height: 1rem;
+			font-weight: bold;
+			font-size: 1rem;
+			padding: 0.5rem 0;
+		}
+
+		#shousuo .fui-sousuo {
+			padding-top: 10px;
+			padding-bottom: 20px;
+			background: #666;
+		}
+
+		#shousuo .fui-search .inner,
+		.fui-search .inner input {
+			background: #fff;
+			line-height: 60px;
+			height: 60px;
+			padding: 0 25px;
+			color: #333;
+			border-radius: 50px;
+			border: none;
+			font-size: 25px;
+		}
+
+		#shousuo .serach {
+			line-height: 60px;
+			font-size: 25px;
+			color: #fff;
+			padding: 0 20px;
+		}
+
+		#shousuo .yingcang {
+			display: none;
+		}
+
+		#shousuo .mengceng {
+			position: fixed;
+			top: 104px;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 101;
+			background: rgba(0, 0, 0, 0.5);
+		}
+
+		#shousuo .yingcang ul {
+			position: fixed;
+			left: 0;
+			top: 104px;
+			z-index: 999;
+			background: #fff;
+			padding: 0 0.5rem;
+			width: 100%;
+			overflow: auto;
+			border-bottom: 3px solid #ccc;
+		}
+
+		#shousuo .yingcang ul li {
+			line-height: 100px;
+			font-size: 28px;
+			font-weight: bold;
+			color: #666;
+			border-top: 1px solid #eaeaea;
+			list-style: none;
+		}
+
+		#g_container>img {
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="shousuo">
+		<div class="fui-sousuo">
+			<div class="fui-search">
+				<input placeholder="如：螺丝" value="" class="inner" id="keywords" data-id="">
+				<div class="serach">搜索</div>
+			</div>
+		</div>
+		<div class="yingcang">
+			<div class="mengceng"></div>
+			<ul>
+				<li class="categoryli" data-id="0">全部</li>
+				<li class="categoryli" data-id="1">未结清</li>
+				<li class="categoryli" data-id="2">已结清</li>
+				<li class="categoryli" data-id="3">未出货</li>
+				<li class="categoryli" data-id="4">已出货</li>
+			</ul>
+		</div>
+	</div>
+	<input type="hidden" id="bjwidth" value="30">
+	<input type="hidden" id="width" value="693">
+	<input type="hidden" id="height" value="500">
+	<div id="g_container" class="pingmian" style="margin-top: 0px; height: 500px;">
+		<img src="https://erp05.sp8.vip/attachment/images/1/merch/1/fxZJ7n2VYn0xMNl2LNvJ782Yv88xYj.jpg" id="pingmian">
+		<div id="draggable">
+			<div class="dian ui-draggable" data-id="1" draggable="true"
+				style="left:111.38px;top:411.125px;width:28px;height:28px;line-height:28px;">1</div>
+			<div class="dian ui-draggable" data-id="2" draggable="true"
+				style="left:145.38px;top:365.125px;width:28px;height:28px;line-height:28px;">2</div>
+			<div class="dian ui-draggable" data-id="3" draggable="true"
+				style="left:51.4062px;top:261.135px;width:28px;height:28px;line-height:28px;">3</div>
+			<div class="dian ui-draggable" data-id="4" draggable="true"
+				style="left:351.378px;top:400.104px;width:28px;height:28px;line-height:28px;">4</div>
+			<div class="dian ui-draggable" data-id="5" draggable="true"
+				style="left:270.401px;top:398.125px;width:28px;height:28px;line-height:28px;">5</div>
+			<div class="dian ui-draggable" data-id="6" draggable="true"
+				style="left:433.393px;top:427.116px;width:28px;height:28px;line-height:28px;">6</div>
+			<div class="dian ui-draggable" data-id="7" draggable="true"
+				style="left:520.402px;top:399.132px;width:28px;height:28px;line-height:28px;">7</div>
+		</div>
+	</div>
+	<a id="add" href="javascript:;">
+		<p>新建</p>
+		<p>托板</p>
+	</a>
+	<input type="hidden" id="scale" value="width=693,maximum-scale=3.0,initial-scale=0.54">
+	<script>
+		$(document).on('click', '.mengceng', function (res) {
+			$('.yingcang').hide();
+		})
+		var timeout;
+		$(document).on('touchstart', '.dian', function (res) {
+			// alert(1);
+			// timeout = setTimeout(function () {
+			// 	alert(2);
+			// }, 2000);
+		})
+		$(document).on('touchmove', '.dian', function (res) {
+			clearTimeout(timeout);//清理掉定时器
+		});
+		$(document).on('touchend', '.dian', function (res) {
+			clearTimeout(timeout);//清理掉定时器
+		});
+		$(document).on('click', '.yingcang .categoryli', function (res) {
+			window.location.href = "./index.php?i=1&c=entry&m=erpv1&do=mobile&r=hwtj&id=1&client=" + $(this).attr('data-id') + '&keywords=' + $(this).attr('data-title');
+		})
+		$(document).on('click', '#shousuo .serach', function (res) {
+			window.location.href = "./index.php?i=1&c=entry&m=erpv1&do=mobile&r=hwtj&id=1&client=" + $('#keywords').attr('data-id') + '&keywords=' + $('#keywords').val();
+		})
+		$(document).on('click', '#shousuo #keywords', function (res) {
+			document.getElementById('testViewport').setAttribute('content', 'width=device-width, initial-scale=1.0,user-scalable=no');
+			document.getElementById('testViewport').setAttribute('content', $('#scale').val());
+		})
+		$(document).on('click input', '#keywords', function (res) {
+			$.ajax({
+				url: "./index.php?i=1&c=entry&m=erpv1&do=mobile&r=hwtj.kehu.get_list&keywords=" + $(this).val(),
+				type: 'post',
+				dataType: 'json',
+				data: {},
+				success: function (res) {
+					$('.yingcang ul').html('');
+					if (res.result.list.length > 0) {
+						$.each(res.result.list, function (k, v) {
+							$('.yingcang ul').append('<li class="categoryli" data-id="' + v.id + '" data-title="' + v.title + '">' + v.title + '/' + v.mobile + ' <span style="float:right">' + v.tuo + '托</span></li>');
+						})
+						$('.yingcang').show();
+					} else {
+						$('.yingcang').hide();
+					}
+
+				}
+			});
+		})
+		$(document).on('click', '#add', function (res) {
+			$.ajax({
+				url: "./index.php?i=1&c=entry&m=erpv1&do=mobile&r=hwtj.tuopan",
+				type: 'post',
+				data: {},
+				success: function (result) {
+					document.getElementById('testViewport').setAttribute('content', 'width=device-width, initial-scale=1.0,user-scalable=no');
+					$("#goodschajian3").html(result).show();
+				}
+			});
+		})
+
+		$(document).on('click', '.closeopen', function () {
+			$('#goodschajian1').hide();
+			$('#goodschajian2').hide();
+			$('#goodschajian3').hide();
+			document.getElementById('testViewport').setAttribute('content', $('#scale').val());
+		})
+
+		$(document).on('click', '#goodschajian3 .submit', function () {
+			var data = new Array();
+			data = {
+				client: $('#goodschajian3 .client').attr('data-id'),
+				tbwidth: $('#goodschajian3 #tbwidth').val(),
+				tbheight: $('#goodschajian3 #tbheight').val(),
+			};
+			if (!data.client) {
+				alert('请选择客户');
+				return false;
+			}
+			var width = chen(chu(data.tbwidth, $('#bjwidth').val()), $('#width').val());
+			var height = chen(chu(data.tbheight, data.tbwidth), width);
+			var left = jian(chu($('#width').val(), 2), chu(width, 2.5));
+			var top = jian(chu($('#height').val(), 2), chu(height, 2));
+			$.ajax({
+				url: "./index.php?i=1&c=entry&m=erpv1&do=mobile&r=hwtj.submit",
+				data: {
+					data: {
+						cid: "1",
+						left: left,
+						top: top,
+						width: width,
+						height: height,
+						client: data.client,
+					},
+				},
+				type: 'post',
+				dataType: 'json',
+				success: function (res) {
+					$('#draggable').append('<div class="dian" data-id="' + res.result.id + '" draggable="true" style="background:#c00;left:' + left + 'px;top:' + top + 'px;width:' + width + 'px;height:' + height + 'px;line-height:' + height + 'px;">' + res.result.id + '</div>');
+					$("#draggable .dian").draggable({
+						containment: '.pingmian'
+					});
+					document.getElementById('testViewport').setAttribute('content', $('#scale').val());
+					$("#goodschajian3").html('').hide();
+				}
+			});
+
+		})
+
+
+
+		$("#draggable .dian").draggable({
+			containment: '.pingmian'
+		});
+
+		$(document).on('click', '#goodschajian2 .serach', function (res) {
+			$.ajax({
+				url: "./index.php?i=1&c=entry&m=erpv1&do=mobile&r=hwtj.kehu&keywords=" + $('#goodschajian2 .fui-search input').val(),
+				type: 'post',
+				data: {},
+				success: function (result) {
+					$("#goodschajian2").html(result).css('z-index', 104).show();
+				}
+			});
+		})
+		$(document).on('click', '#goodschajian2 .addghs', function (res) {
+			$("#goodschajian2").html('').hide();
+			$.ajax({
+				url: "./index.php?i=1&c=entry&m=erpv1&do=mobile&r=hwtj.kehu.add",
+				type: 'post',
+				data: {},
+				success: function (result) {
+					$("#goodschajian1").html(result).css('z-index', 104).show();
+				}
+			});
+		})
+		$(document).on('click', '#goodschajian1 .submit', function () {
+			var data = new Array();
+			data = {
+				title: $('#goodschajian1 #title').val(),
+				address: $('#goodschajian1 #address').val(),
+				realname: $('#goodschajian1 #realname').val(),
+				mobile: $('#goodschajian1 #mobile').val(),
+			};
+			$.ajax({
+				url: "./index.php?i=1&c=entry&m=erpv1&do=mobile&r=hwtj.kehu.submit",
+				data: { data: data },
+				type: 'post',
+				dataType: 'json',
+				success: function (res) {
+					if (res.status == 1) {
+						$('#goodschajian3 .client').attr('data-id', res.result.id).find('.fui-cell-remark').html(data.title);
+						$("#goodschajian1").html('').hide();
+					} else {
+						FoxUI.toast.show(res.result.message);
+					}
+				}
+			});
+		});
+
+
+		$(document).on('click', '#goodschajian2 .submit-params', function (res) {
+			var id = $(this).attr('data-value');
+			var title = $(this).find('.param5').html();
+			var realname = $(this).attr('data-realname');
+			var mobile = $(this).attr('data-mobile');
+			$('#goodschajian2').html('').hide();
+			$('#goodschajian3 .client').attr('data-id', id).find('.fui-cell-remark').html(title);
+
+		})
+		$(document).on('click', '#goodschajian3 .client', function (res) {
+			$.ajax({
+				url: "./index.php?i=1&c=entry&m=erpv1&do=mobile&r=hwtj.kehu",
+				type: 'post',
+				data: {},
+				success: function (result) {
+					$("#goodschajian2").html(result).css('z-index', 104).show();
+				}
+			});
+		})
+
+		$(document).on('touchend', '.ui-draggable', function (res) {
+			var id = $(this).attr('data-id');
+			var left = $(this).css('left').replace(/px/g, '')
+			var top = $(this).css('top').replace(/px/g, '');
+			var width = $(this).css('width').replace(/px/g, '');
+			var height = $(this).css('height').replace(/px/g, '');
+			$(this).css('background', '#2591d2');
+			$.ajax({
+				url: "./index.php?i=1&c=entry&m=erpv1&do=mobile&r=hwtj.submit",
+				data: {
+					data: {
+						id: id,
+						cid: "1",
+						left: left,
+						top: top,
+						width: width,
+						height: height,
+					},
+				},
+				type: 'post',
+				dataType: 'json',
+				success: function (res) {
+
+				}
+			})
+		})
+		$(document).on('click', 'input', function (res) {
+			$(this).select();
+		})
+
+		$(document).ready(function () {
+			suofang();
+		});
+		function suofang() {
+			var img = new Image();
+			img.onload = function () {
+				var width = img.width;
+				var height = img.height;
+				$('#width').val(width);
+				$('#height').val(height);
+				$('#scale').val('width=' + width + ',maximum-scale=3.0,initial-scale=' + chu(window.innerWidth, width));
+				var mvp = document.getElementById('testViewport');
+				mvp.setAttribute('content', 'width=' + width + ',maximum-scale=3.0,initial-scale=' + chu(window.innerWidth, width));
+
+				$('.pingmian').css('margin-top', chu(height, 2) + 'px').css('height', height + 'px');
+			};
+			img.src = "https://erp05.sp8.vip/attachment/images/1/merch/1/ww1a2746t176W6aUmCW424TTaW16V7.jpg";
+		}
+	</script>
+	<script language="javascript">
+		/* 通用方法起始 */
+		(function () {
+			if (typeof WeixinJSBridge === 'object' && typeof WeixinJSBridge.invoke === 'function') {
+				handleFontSize()
+			} else {
+				if (document.addEventListener) {
+					document.addEventListener('WeixinJSBridgeReady', handleFontSize, false)
+				} else if (document.attachEvent) {
+					document.attachEvent('WeixinJSBridgeReady', handleFontSize)
+					document.attachEvent('onWeixinJSBridgeReady', handleFontSize)
+				}
+			}
+			function handleFontSize() {
+				// 设置网页字体为默认大小
+				WeixinJSBridge.invoke('setFontSizeCallback', { fontSize: 0 })
+				// 重写设置网页字体大小的事件
+				WeixinJSBridge.on('menu:setfont', function () {
+					WeixinJSBridge.invoke('setFontSizeCallback', { fontSize: 0 })
+				})
+			}
+		})()
+
+		$(document).on('click', '.goods', function () {
+			if ($('.goods').attr('data-status') == 1) {
+				$('.goods').attr('data-status', 0);
+				$(this).find('.fui-cell-label').next().show();
+				$(this).find('.fui-cell-label').next().next().hide();
+			} else {
+				$('.goods').attr('data-status', 1);
+				$(this).find('.fui-cell-label').next().hide();
+				$(this).find('.fui-cell-label').next().next().show();
+			}
+			$('#goods').toggle();
+		})
+
+		function jia(num1, num2) {
+			var baseNum, baseNum1, baseNum2;
+			try {
+				baseNum1 = num1.toString().split(".")[1].length;
+			} catch (e) {
+				baseNum1 = 0;
+			}
+			try {
+				baseNum2 = num2.toString().split(".")[1].length;
+			} catch (e) {
+				baseNum2 = 0;
+			}
+			baseNum = Math.pow(10, Math.max(baseNum1, baseNum2));
+			return (num1 * baseNum + num2 * baseNum) / baseNum;
+		};
+		/**
+		* 加法运算，避免数据相减小数点后产生多位数和计算精度损失。
+		*
+		* @param num1被减数 | num2减数
+		*/
+		function jian(num1, num2) {
+			var baseNum, baseNum1, baseNum2;
+			var precision;// 精度
+			try {
+				baseNum1 = num1.toString().split(".")[1].length;
+			} catch (e) {
+				baseNum1 = 0;
+			}
+			try {
+				baseNum2 = num2.toString().split(".")[1].length;
+			} catch (e) {
+				baseNum2 = 0;
+			}
+			baseNum = Math.pow(10, Math.max(baseNum1, baseNum2));
+			precision = (baseNum1 >= baseNum2) ? baseNum1 : baseNum2;
+			return ((num1 * baseNum - num2 * baseNum) / baseNum).toFixed(precision);
+		};
+		/**
+		* 乘法运算，避免数据相乘小数点后产生多位数和计算精度损失。
+		*
+		* @param num1被乘数 | num2乘数
+		*/
+		function chen(num1, num2) {
+			var baseNum = 0;
+			try {
+				baseNum += num1.toString().split(".")[1].length;
+			} catch (e) {
+			}
+			try {
+				baseNum += num2.toString().split(".")[1].length;
+			} catch (e) {
+			}
+			return (Number(num1.toString().replace(".", "")) * Number(num2.toString().replace(".", "")) / Math.pow(10, baseNum)).toFixed(2) * 1;
+		};
+		/**
+		* 除法运算，避免数据相除小数点后产生多位数和计算精度损失。
+		*
+		* @param num1被除数 | num2除数
+		*/
+		function chu(num1, num2) {
+			var baseNum1 = 0, baseNum2 = 0;
+			var baseNum3, baseNum4;
+			try {
+				baseNum1 = num1.toString().split(".")[1].length;
+			} catch (e) {
+				baseNum1 = 0;
+			}
+			try {
+				baseNum2 = num2.toString().split(".")[1].length;
+			} catch (e) {
+				baseNum2 = 0;
+			}
+			with (Math) {
+				baseNum3 = Number(num1.toString().replace(".", ""));
+				baseNum4 = Number(num2.toString().replace(".", ""));
+				return ((baseNum3 / baseNum4) * pow(10, baseNum2 - baseNum1)).toFixed(2);
+			}
+		};
+
+
+		$(document).on('click', '.gohome', function () {
+			wx.miniProgram.navigateTo({ url: '/pages/index/index' })
+		})
+		/* 通用方法结束 */
+	</script>
+
+	<style>
+		#goodschajian1 {
+			display: none;
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 100;
+		}
+
+		#goodschajian2 {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 99;
+		}
+
+		#goodschajian3 {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 102;
+		}
+
+		#goodschajian1 .mengceng {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+			background: rgba(0, 0, 0, 0.5);
+		}
+
+		#goodschajian2 .mengceng {
+			position: fixed;
+			top: 4.5rem;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+			background: rgba(0, 0, 0, 0.5);
+		}
+
+		#goodschajian3 .mengceng {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+			background: rgba(0, 0, 0, 0.5);
+		}
+
+		#goodschajian3 .fui-cell-group .fui-cell .fui-input {
+			width: 100%;
+			padding-left: 30px;
+			text-align: left;
+		}
+	</style>
+	<div id="goodschajian1" class="tanchuang" data="1"></div>
+	<div id="goodschajian2" class="tanchuang" data="2"></div>
+	<div id="goodschajian3" class="tanchuang" data="3"></div>
+	<script>
+		$(document).on('click', '#goodschajian2 #xinghao,#goodschajian2 #client', function () {
+			$(this).find('.yingcang').show();
+		})
+		$(document).on('click', '#goodschajian2 #xinghao .categoryli,#goodschajian2 #client .storehouseli', function () {
+			var id = $(this).attr('data-id');
+			var name = $(this).html();
+			$(this).parent().parent().parent().attr('data-id', id);
+			$(this).parent().parent().parent().find('span').html(name);
+			$(this).parents('.yingcang').hide(1);
+		})
+		$(document).on('click', '#goodschajian2 .mengceng', function () {
+			$(this).parents('.yingcang').hide(1);
+		})
+		$(document).on('click', '#goodschajian3 .mengceng', function () {
+			$(this).parents('.yingcang').hide(1);
+		})
+		$(document).on('click', '.closeopen', function () {
+			var data = $(this).parents('.tanchuang').attr('data');
+			$('#goodschajian1').hide();
+			$('#goodschajian2').hide();
+			$('#goodschajian3').hide();
+		})
+	</script>
+</body>
+<script src="./gensture.js"></script>
+<script src="//cdn.bootcss.com/eruda/1.3.0/eruda.min.js"></script>
+<script>eruda.init();</script>
+
+</html>
